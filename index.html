@@ -245,7 +245,7 @@
         }
       }
       function getCache(n, k) {
-        fetch(window.location.href + "cache/" + n + "C" + k + ".txt")
+        fetch(window.location.href + "/cache/" + n + "C" + k + ".txt")
           .then((res) => {
             return res.blob();
           }) // Gets the response and returns it as a blob
@@ -303,7 +303,7 @@
               type="number"
               id="n"
               name="n"
-              value="7"
+              value="50"
               min="2"
               max="65"
           /></label>
