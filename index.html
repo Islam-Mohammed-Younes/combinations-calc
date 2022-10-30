@@ -145,6 +145,11 @@
           results.value = "";
           if (parseInt(statustext.value) > 2_200_000) {
             statustext.value = "Can't Calculate This";
+            results.value = "";
+            button.textContent = "Evaluate";
+            button.style.backgroundColor = "#4caf50";
+            service = 0;
+
             return;
           } else if (parseInt(statustext.value) > 30_000) {
             getCache(parseInt(n.value), parseInt(k.value));
@@ -250,10 +255,16 @@
             a.setAttribute("href", url); // Set "a" element link
             fromCache = true;
             //truncuate the blob to be viewable
-            return blob.slice(0, blob.size / 10).text();
+            return blob
+              .slice(0, blob.size / 10)
+              .text()
+              .split("\n")
+              .pop()
+              .join("\n");
           })
           .then((t) => {
-            results.value = t;
+            results.value =
+              t + "-- un complete list --\n--You can download the full list--";
           })
           .catch((err) => {
             statustext.value = "Error";
