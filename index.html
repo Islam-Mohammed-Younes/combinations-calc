@@ -145,6 +145,7 @@
           results.value = "";
           if (parseInt(statustext.value) > 2_200_000) {
             statustext.value = "Can't Calculate This";
+            return;
           } else if (parseInt(statustext.value) > 30_000) {
             getCache(parseInt(n.value), parseInt(k.value));
           } else {
@@ -169,12 +170,11 @@
             "results" + parseInt(n.value) + "C" + parseInt(k.value) + ".txt",
             fromCache
           );
-
-          statustext.value = "Ready";
-          button.textContent = "Evaluate";
-          button.style.backgroundColor = "#4caf50";
-          service = 0;
         }
+        statustext.value = "Ready";
+        button.textContent = "Evaluate";
+        button.style.backgroundColor = "#4caf50";
+        service = 0;
       }
 
       let tmp = [];
