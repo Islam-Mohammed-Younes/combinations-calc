@@ -227,7 +227,6 @@
             return res.blob();
           }) // Gets the response and returns it as a blob
           .then((blob) => {
-            results.value = blob.text();
             const a = document.createElement("a"); // Create "a" element
             const url = URL.createObjectURL(blob); // Create an object URL from blob
             a.setAttribute("href", url); // Set "a" element link
@@ -236,6 +235,11 @@
               "results" + parseInt(n.value) + "C" + parseInt(k.value) + ".txt"
             ); // Set download filename
             a.click(); // Start downloading
+
+            return blob.text();
+          })
+          .then((t) => {
+            results.value = t;
           })
           .catch((err) => {
             statustext.value = "Error";
