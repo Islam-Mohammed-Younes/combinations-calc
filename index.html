@@ -110,6 +110,7 @@
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       var service = 0;
+      var downloadedString = "";
 
       let n = document.querySelector("#n");
       let k = document.querySelector("#k");
@@ -227,11 +228,11 @@
             return res.text();
           })
           .then((text) => {
-            //results.value = text;
+            // results.value = text;
+            downloadedString = text;
             return res.blob();
           }) // Gets the response and returns it as a blob
           .then((blob) => {
-            results.value = blob;
             const a = document.createElement("a"); // Create "a" element
             const url = URL.createObjectURL(blob); // Create an object URL from blob
             a.setAttribute("href", url); // Set "a" element link
@@ -245,6 +246,7 @@
             statustext.value = "Error";
             results.value = "";
           });
+        results.value = downloadedString;
       }
       function clear() {
         statustext.value = "Ready";
