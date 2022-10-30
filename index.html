@@ -160,7 +160,7 @@
           download(
             results.value,
             "text/plain",
-            "results" + n + "C" + k + ".txt"
+            "results" + parseInt(n.value) + "C" + parseInt(k.value) + ".txt"
           );
 
           statustext.value = "Ready";
@@ -236,7 +236,7 @@
             a.setAttribute("href", url); // Set "a" element link
             a.setAttribute(
               "download",
-              "results" + n.value + "C" + k.value + ".txt"
+              "results" + parseInt(n.value) + "C" + parseInt(k.value) + ".txt"
             ); // Set download filename
             a.click(); // Start downloading
           });
