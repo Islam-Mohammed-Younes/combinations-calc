@@ -110,6 +110,7 @@
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       var service = 0;
+      var fromCache = false;
 
       let n = document.querySelector("#n");
       let k = document.querySelector("#k");
@@ -160,7 +161,8 @@
           download(
             results.value,
             "text/plain",
-            "results" + parseInt(n.value) + "C" + parseInt(k.value) + ".txt"
+            "results" + parseInt(n.value) + "C" + parseInt(k.value) + ".txt",
+            fromCache
           );
 
           statustext.value = "Ready";
@@ -213,13 +215,22 @@
         for (var i = 2; i <= num; i++) rval = rval * i;
         return rval;
       }
-      function download(content, mimeType, filename) {
-        const a = document.createElement("a"); // Create "a" element
-        const blob = new Blob([content], { type: mimeType }); // Create a blob (file-like object)
-        const url = URL.createObjectURL(blob); // Create an object URL from blob
-        a.setAttribute("href", url); // Set "a" element link
-        a.setAttribute("download", filename); // Set download filename
-        a.click(); // Start downloading
+      function download(content, mimeType, filename, fromCache) {
+        if (fromCache) {
+          a.setAttribute(
+            "download",
+            "results" + parseInt(n.value) + "C" + parseInt(k.value) + ".txt"
+          ); // Set download filename
+          a.click(); // Start downloading
+          fromCache = false;
+        } else {
+          const a = document.createElement("a"); // Create "a" element
+          const blob = new Blob([content], { type: mimeType }); // Create a blob (file-like object)
+          const url = URL.createObjectURL(blob); // Create an object URL from blob
+          a.setAttribute("href", url); // Set "a" element link
+          a.setAttribute("download", filename); // Set download filename
+          a.click(); // Start downloading
+        }
       }
       function getCache(n, k) {
         fetch(window.location.href + "cache/" + n + "C" + k + ".txt")
@@ -230,12 +241,7 @@
             const a = document.createElement("a"); // Create "a" element
             const url = URL.createObjectURL(blob); // Create an object URL from blob
             a.setAttribute("href", url); // Set "a" element link
-            a.setAttribute(
-              "download",
-              "results" + parseInt(n.value) + "C" + parseInt(k.value) + ".txt"
-            ); // Set download filename
-            a.click(); // Start downloading
-
+            fromCache = true;
             return blob.text();
           })
           .then((t) => {
@@ -244,6 +250,7 @@
           .catch((err) => {
             statustext.value = "Error";
             results.value = "";
+            fromCache = false;
           });
       }
       function clear() {
@@ -251,6 +258,7 @@
         results.value = "";
         button.textContent = "Evaluate";
         button.style.backgroundColor = "#4caf50";
+        fromCache = false;
         service = 0;
       }
     });
