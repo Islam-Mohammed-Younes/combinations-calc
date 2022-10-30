@@ -222,7 +222,7 @@
         a.click(); // Start downloading
       }
       function getCache(n, k) {
-        fetch(window.location.href + "cache" + n + "C" + k + ".txt")
+        fetch(window.location.href + "cache/" + n + "C" + k + ".txt")
           .then((res) => {
             results.value = res;
             return res.blob();
