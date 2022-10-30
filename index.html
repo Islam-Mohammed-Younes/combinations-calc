@@ -243,6 +243,7 @@
             a.click(); // Start downloading
           })
           .catch((err) => {
+            console.log(err)
             statustext.value = "Error";
             results.value = "";
           });
