@@ -110,7 +110,6 @@
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       var service = 0;
-      var downloadedString = "";
 
       let n = document.querySelector("#n");
       let k = document.querySelector("#k");
@@ -225,12 +224,10 @@
       function getCache(n, k) {
         fetch(window.location.href + "cache/" + n + "C" + k + ".txt")
           .then((res) => {
-            return { text: res.text(), res: res };
+            return res.text();
           })
-          .then((data) => {
-            // results.value = text;
-            downloadedString = data.text;
-            res = data.res;
+          .then((text) => {
+            results.value = text;
             return res.blob();
           }) // Gets the response and returns it as a blob
           .then((blob) => {
@@ -244,11 +241,9 @@
             a.click(); // Start downloading
           })
           .catch((err) => {
-            console.log(err);
             statustext.value = "Error";
             results.value = "";
           });
-        results.value = downloadedString;
       }
       function clear() {
         statustext.value = "Ready";
