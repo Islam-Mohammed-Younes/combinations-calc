@@ -245,8 +245,8 @@
         }
       }
       function getCache(n, k) {
-        alert(window.location.href + "/cache/" + n + "C" + k + ".txt")
-        fetch(window.location.href + "/cache/" + n + "C" + k + ".txt")
+        //alert(window.location.href + "/cache/" + n + "C" + k + ".txt")
+        fetch(window.location.href + "cache/" + n + "C" + k + ".txt")
           .then((res) => {
             return res.blob();
           }) // Gets the response and returns it as a blob
