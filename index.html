@@ -255,16 +255,11 @@
             a.setAttribute("href", url); // Set "a" element link
             fromCache = true;
             //truncuate the blob to be viewable
-            return blob
-              .slice(0, blob.size / 10)
-              .text()
-              .split("\n")
-              .pop()
-              .join("\n");
+            return blob.slice(0, blob.size / 10).text();
           })
           .then((t) => {
-            results.value =
-              t + "-- un complete list --\n--You can download the full list--";
+            results.value = t.split("\n").pop().join("\n");
+            +"-- un complete list --\n--You can download the full list--";
           })
           .catch((err) => {
             statustext.value = "Error";
