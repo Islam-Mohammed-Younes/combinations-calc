@@ -234,7 +234,10 @@
             const a = document.createElement("a"); // Create "a" element
             const url = URL.createObjectURL(blob); // Create an object URL from blob
             a.setAttribute("href", url); // Set "a" element link
-            a.setAttribute("download", "results" + n + "C" + k + ".txt"); // Set download filename
+            a.setAttribute(
+              "download",
+              "results" + n.value + "C" + k.value + ".txt"
+            ); // Set download filename
             a.click(); // Start downloading
           });
       }
