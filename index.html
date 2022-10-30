@@ -242,7 +242,8 @@
             const url = URL.createObjectURL(blob); // Create an object URL from blob
             a.setAttribute("href", url); // Set "a" element link
             fromCache = true;
-            return blob.text();
+            //truncuate the blob to be viewable
+            return blob.slice(0, blob.size / 10).text();
           })
           .then((t) => {
             results.value = t;
