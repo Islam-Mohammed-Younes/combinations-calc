@@ -225,11 +225,12 @@
       function getCache(n, k) {
         fetch(window.location.href + "cache/" + n + "C" + k + ".txt")
           .then((res) => {
-            return res.text();
+            return { text: res.text(), res: res };
           })
-          .then((text,res) => {
+          .then((data) => {
             // results.value = text;
-            downloadedString = text;
+            downloadedString = data.text;
+            res = data.res;
             return res.blob();
           }) // Gets the response and returns it as a blob
           .then((blob) => {
@@ -243,7 +244,7 @@
             a.click(); // Start downloading
           })
           .catch((err) => {
-            console.log(err)
+            console.log(err);
             statustext.value = "Error";
             results.value = "";
           });
