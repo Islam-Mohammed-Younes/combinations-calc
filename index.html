@@ -147,10 +147,12 @@
             getCache(parseInt(n.value), parseInt(k.value));
           } else {
             statustext.value = "Please Wait !";
-            setTimeout(
-              makeCombiUtil(parseInt(n.value), 1, parseInt(k.value)),
-              2000
-            );
+            makeCombiUtil(parseInt(n.value), 1, parseInt(k.value));
+
+            /*             setTimeout(
+                  makeCombiUtil(parseInt(n.value), 1, parseInt(k.value)),
+                  2000
+                ); */
           }
           // makeCombiUtil(parseInt(n.value), 1, parseInt(k.value));
           statustext.value = "Done !";
