@@ -258,7 +258,9 @@
             return blob.slice(0, blob.size / 10).text();
           })
           .then((t) => {
-            results.value = t.split("\n").pop().join("\n");
+            let formated = t.split("\n");
+            formated.pop();
+            results.value = formated.join("\n");
             +"-- un complete list --\n--You can download the full list--";
           })
           .catch((err) => {
