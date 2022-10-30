@@ -255,7 +255,7 @@
             a.setAttribute("href", url); // Set "a" element link
             fromCache = true;
             //truncuate the blob to be viewable
-            return blob.slice(0, blob.size / 10).text();
+            return blob.slice(0, blob.size / 5).text();
           })
           .then((t) => {
             let formated = t.split("\n");
