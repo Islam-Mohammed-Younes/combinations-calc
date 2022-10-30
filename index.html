@@ -239,6 +239,9 @@
               "results" + parseInt(n.value) + "C" + parseInt(k.value) + ".txt"
             ); // Set download filename
             a.click(); // Start downloading
+          })
+          .catch((err) => {
+            statustext.value = "Error";
           });
       }
       function clear() {
