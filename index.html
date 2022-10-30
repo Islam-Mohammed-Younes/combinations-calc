@@ -111,6 +111,7 @@
     document.addEventListener("DOMContentLoaded", function () {
       var service = 0;
       var fromCache = false;
+      var a;
 
       let n = document.querySelector("#n");
       let k = document.querySelector("#k");
@@ -223,8 +224,9 @@
           ); // Set download filename
           a.click(); // Start downloading
           fromCache = false;
+          a = false;
         } else {
-          const a = document.createElement("a"); // Create "a" element
+          a = document.createElement("a"); // Create "a" element
           const blob = new Blob([content], { type: mimeType }); // Create a blob (file-like object)
           const url = URL.createObjectURL(blob); // Create an object URL from blob
           a.setAttribute("href", url); // Set "a" element link
@@ -238,7 +240,7 @@
             return res.blob();
           }) // Gets the response and returns it as a blob
           .then((blob) => {
-            const a = document.createElement("a"); // Create "a" element
+            a = document.createElement("a"); // Create "a" element
             const url = URL.createObjectURL(blob); // Create an object URL from blob
             a.setAttribute("href", url); // Set "a" element link
             fromCache = true;
@@ -252,6 +254,7 @@
             statustext.value = "Error";
             results.value = "";
             fromCache = false;
+            a = false;
           });
       }
       function clear() {
@@ -260,6 +263,7 @@
         button.textContent = "Evaluate";
         button.style.backgroundColor = "#4caf50";
         fromCache = false;
+        a = false;
         service = 0;
       }
     });
