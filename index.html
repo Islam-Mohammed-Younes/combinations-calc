@@ -126,7 +126,6 @@
 
       function buttonDo(e) {
         e.preventDefault();
-        //alert("hi");
 
         if (service == 0) {
           results.value = "";
@@ -142,11 +141,15 @@
           service = 1;
         } else if (service == 1) {
           results.value = "";
-          statustext.value = "Please Wait !";
-          setTimeout(
-            makeCombiUtil(parseInt(n.value), 1, parseInt(k.value)),
-            2000
-          );
+          if (parseInt(statustext.value) > 50_000) {
+            getCache(parseInt(n.value), parseInt(k.value));
+          } else {
+            statustext.value = "Please Wait !";
+            setTimeout(
+              makeCombiUtil(parseInt(n.value), 1, parseInt(k.value)),
+              2000
+            );
+          }
           // makeCombiUtil(parseInt(n.value), 1, parseInt(k.value));
           statustext.value = "Done !";
 
@@ -154,7 +157,11 @@
           button.style.backgroundColor = "#eb7134";
           service = 2;
         } else if (service == 2) {
-          download(results.value, "text/plain", "results.txt");
+          download(
+            results.value,
+            "text/plain",
+            "results" + n + "C" + k + ".txt"
+          );
 
           statustext.value = "Ready";
           button.textContent = "Evaluate";
@@ -214,6 +221,20 @@
         a.setAttribute("download", filename); // Set download filename
         a.click(); // Start downloading
       }
+      function getCache(n, k) {
+        fetch(window.location.href + "cache" + n + "C" + k + ".txt")
+          .then((res) => {
+            results.value = res;
+            return res.blob();
+          }) // Gets the response and returns it as a blob
+          .then((blob) => {
+            const a = document.createElement("a"); // Create "a" element
+            const url = URL.createObjectURL(blob); // Create an object URL from blob
+            a.setAttribute("href", url); // Set "a" element link
+            a.setAttribute("download", "results" + n + "C" + k + ".txt"); // Set download filename
+            a.click(); // Start downloading
+          });
+      }
       function clear() {
         statustext.value = "Ready";
         results.value = "";
@@ -238,11 +259,25 @@
       <form>
         <div class="inputarea">
           <label
-            >n = <input class="txtbox" type="number" id="n" name="n" value="7"
+            >n =
+            <input
+              class="txtbox"
+              type="number"
+              id="n"
+              name="n"
+              value="7"
+              min="1"
           /></label>
 
           <label
-            >k = <input class="txtbox" type="number" id="k" name="k" value="5"
+            >k =
+            <input
+              class="txtbox"
+              type="number"
+              id="k"
+              name="k"
+              value="5"
+              min="1"
           /></label>
         </div>
 
