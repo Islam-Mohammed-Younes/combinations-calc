@@ -227,7 +227,7 @@
           .then((res) => {
             return res.text();
           })
-          .then((text) => {
+          .then((text,res) => {
             // results.value = text;
             downloadedString = text;
             return res.blob();
