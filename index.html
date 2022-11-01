@@ -226,6 +226,15 @@
       }
       function download(content, mimeType, filename, fromCache) {
         if (fromCache) {
+          fetch(window.location.href + "cache/" + n + "C" + k + ".pdf")
+            .then((res) => {
+              return res.blob();
+            }) // Gets the response and returns it as a blob
+            .then((blob) => {
+              a = document.createElement("a"); // Create "a" element
+              const url = URL.createObjectURL(blob); // Create an object URL from blob
+              a.setAttribute("href", url); // Set "a" element link
+            });
           a.setAttribute(
             "download",
             "results" + parseInt(n.value) + "C" + parseInt(k.value) + ".pdf"
