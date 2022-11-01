@@ -139,7 +139,7 @@
 
       function buttonDo(e) {
         e.preventDefault();
-
+        calcNK();
         if (service == 0) {
           //clear older results
           results.value = "";
@@ -237,7 +237,7 @@
           });
       }
       function getCache(nvalue, kvalue) {
-        //alert(window.location.href + "/cache/" + n + "C" + k + ".txt")
+        //alert(window.location.href + "cache/" + nvalue + "C" + kvalue + ".txt")
         fetch(window.location.href + "cache/" + nvalue + "C" + kvalue + ".txt")
           .then((res) => {
             return res.blob();
