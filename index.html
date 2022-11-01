@@ -113,8 +113,8 @@
       var maxPossible = 2_500_000;
       var minPossible = 0;
       var maxViewableFileSize = 4 * 1024 * 1024; //5 Mebibyte
-      var baseURL=window.location.href
-     // var baseURL = "./";
+      var baseURL = window.location.href;
+      // var baseURL = "./";
 
       //global vars
       var service = 0;
@@ -218,7 +218,7 @@
             return b64toBlob(blob, "application/pdf");
           }) // Gets the response and returns it as a blob */
       function download() {
-        return
+        return;
         fetch(baseURL + "cache/" + nvalue + "C" + kvalue + ".pdf")
           .then((res) => {
             return res.blob();
@@ -255,7 +255,8 @@
           .then((text) => {
             let formated = text.split("\n");
             formated.pop();
-            results.value = "فضلا تواصل معي على واتساب\n+201092634376\nحتى استطيع المساعدة\n"+formated.join("\n");
+            //"فضلا تواصل معي على واتساب\n+201092634376\nحتى استطيع المساعدة\n"
+            results.value = formated.join("\n");
 
             if (isTruncuated)
               results.value +=
