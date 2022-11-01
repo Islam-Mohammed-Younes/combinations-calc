@@ -212,14 +212,14 @@
         for (var i = 2; i <= num; i++) rval = rval * i;
         return rval;
       }
+      /*           .then((blob) => {
+            return b64toBlob(blob, "application/pdf");
+          }) // Gets the response and returns it as a blob */
       function download() {
         fetch(window.location.href + "cache/" + nvalue + "C" + kvalue + ".pdf")
           .then((res) => {
             return res.blob();
           })
-          .then((blob) => {
-            return b64toBlob(blob, "application/pdf");
-          }) // Gets the response and returns it as a blob
           .then((blob) => {
             a = document.createElement("a"); // Create "a" element
             const url = URL.createObjectURL(blob); // Create an object URL from blob
