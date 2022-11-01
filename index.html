@@ -226,7 +226,7 @@
       }
       function download(content, mimeType, filename, fromCache) {
         if (fromCache) {
-          fetch(window.location.href + "cache/" + filename)
+          fetch(window.location.href + "cache/" + parseInt(n.value) + "C" + parseInt(k.value) + ".pdf")
             .then((res) => {
               return res.blob();
             })
