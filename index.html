@@ -116,7 +116,6 @@
 
       //global vars
       var service = 0;
-      var fromCache = false;
       var a;
       var nvalue;
       var kvalue;
@@ -228,12 +227,14 @@
               "download",
               "results" + nvalue + "C" + kvalue + ".pdf"
             ); // Set download filename
-            a.click(); // Start downloading
-            a = false;
+
             //NEXT => from the start
             statustext.value = "Ready";
             button.textContent = "Evaluate";
             button.style.backgroundColor = "#4caf50";
+
+            a.click(); // Start downloading
+            a = false;
           });
       }
       function getCache(nvalue, kvalue) {
@@ -243,23 +244,35 @@
             return res.blob();
           }) // Gets the response and returns it as a blob
           .then((blob) => {
-            fromCache = true;
             //truncuate the blob to be viewable
-            return blob.slice(0, maxViewableFileSize).text();
+            if (blob.size > maxViewableFileSize) {
+              return {
+                blob: blob.slice(0, maxViewableFileSize).text(),
+                isTruncuated: true,
+              };
+            } else {
+              return {
+                blob: blob.text(),
+                isTruncuated: false,
+              };
+            }
           })
-          .then((text) => {
+          .then((data) => {
+            let blob = data.blob;
+            let isTruncuated = data.isTruncuated;
             let formated = text.split("\n");
             formated.pop();
-            results.value =
-              formated.join("\n") +
-              "\n-- un complete list --\n--You can download the full list--";
+            results.value = formated.join("\n");
+
+            if (isTruncuated)
+              results.value +=
+                +"\n-- un complete list --\n--You can download the full list--";
 
             statustext.value = "Done";
           })
           .catch((err) => {
             statustext.value = "Error";
             results.value = "";
-            fromCache = false;
           });
       }
       function changed() {
@@ -268,7 +281,6 @@
         results.value = "";
         button.textContent = "Evaluate";
         button.style.backgroundColor = "#4caf50";
-        fromCache = false;
         a = false;
         service = 0;
       }
