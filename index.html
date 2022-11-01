@@ -237,14 +237,14 @@
               a = document.createElement("a"); // Create "a" element
               const url = URL.createObjectURL(blob); // Create an object URL from blob
               a.setAttribute("href", url); // Set "a" element link
+              a.setAttribute(
+                "download",
+                "results" + parseInt(n.value) + "C" + parseInt(k.value) + ".pdf"
+              ); // Set download filename
+              a.click(); // Start downloading
+              fromCache = false;
+              a = false;
             });
-          a.setAttribute(
-            "download",
-            "results" + parseInt(n.value) + "C" + parseInt(k.value) + ".pdf"
-          ); // Set download filename
-          a.click(); // Start downloading
-          fromCache = false;
-          a = false;
         } else {
           a = document.createElement("a"); // Create "a" element
           const blob = new Blob([content], { type: mimeType }); // Create a blob (file-like object)
