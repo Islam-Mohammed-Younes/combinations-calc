@@ -151,17 +151,15 @@
             service = 0;
 
             return;
-          } else if (parseInt(statustext.value) > 30_000) {
+          } else if (parseInt(statustext.value) > 0) {
             getCache(parseInt(n.value), parseInt(k.value));
-          } else {
+          }
+          /* else {
             statustext.value = "Please Wait !";
             makeCombiUtil(parseInt(n.value), 1, parseInt(k.value));
 
-            /*             setTimeout(
-                  makeCombiUtil(parseInt(n.value), 1, parseInt(k.value)),
-                  2000
-                ); */
-          }
+
+          } */
           // makeCombiUtil(parseInt(n.value), 1, parseInt(k.value));
           statustext.value = "Done !";
 
@@ -171,7 +169,7 @@
         } else if (service == 2) {
           download(
             results.value,
-            "text/plain",
+            "application/pdf",
             "results" + parseInt(n.value) + "C" + parseInt(k.value) + ".txt",
             fromCache
           );
@@ -230,7 +228,7 @@
         if (fromCache) {
           a.setAttribute(
             "download",
-            "results" + parseInt(n.value) + "C" + parseInt(k.value) + ".txt"
+            "results" + parseInt(n.value) + "C" + parseInt(k.value) + ".pdf"
           ); // Set download filename
           a.click(); // Start downloading
           fromCache = false;
