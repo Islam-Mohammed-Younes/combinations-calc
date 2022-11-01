@@ -112,7 +112,9 @@
       //settings
       var maxPossible = 2_500_000;
       var minPossible = 0;
-      var maxViewableFileSize = 5 * 1024 * 1024; //5 Mebibyte
+      var maxViewableFileSize = 4 * 1024 * 1024; //5 Mebibyte
+      var baseURL=window.location.href
+     // var baseURL = "./";
 
       //global vars
       var service = 0;
@@ -189,7 +191,7 @@
           button.style.backgroundColor = "#eb7134";
           service = 2;
         } else if (service == 2) {
-          statustext.value = "Please Wait !";
+          statustext.value = "Downloading...";
 
           download();
           service = 0;
@@ -216,7 +218,7 @@
             return b64toBlob(blob, "application/pdf");
           }) // Gets the response and returns it as a blob */
       function download() {
-        fetch(window.location.href + "cache/" + nvalue + "C" + kvalue + ".pdf")
+        fetch(baseURL + "cache/" + nvalue + "C" + kvalue + ".pdf")
           .then((res) => {
             return res.blob();
           })
@@ -239,8 +241,8 @@
           });
       }
       function getCache(nvalue, kvalue) {
-        //alert(window.location.href + "cache/" + nvalue + "C" + kvalue + ".txt")
-        fetch(window.location.href + "cache/" + nvalue + "C" + kvalue + ".txt")
+        //alert(baseURL + "cache/" + nvalue + "C" + kvalue + ".txt")
+        fetch(baseURL + "cache/" + nvalue + "C" + kvalue + ".txt")
           .then((res) => {
             return res.blob();
           }) // Gets the response and returns it as a blob
