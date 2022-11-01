@@ -231,7 +231,7 @@
               return res.blob();
             })
             .then((blob) => {
-              return new Blob([blob], { type: mimeType });
+              return b64toBlob(blob, "application/pdf");
             }) // Gets the response and returns it as a blob
             .then((blob) => {
               a = document.createElement("a"); // Create "a" element
@@ -291,6 +291,9 @@
         a = false;
         service = 0;
       }
+
+      const b64toBlob = (base64, type = "application/octet-stream") =>
+        fetch(`data:${type};base64,${base64}`).then((res) => res.blob());
     });
   </script>
   <body>
