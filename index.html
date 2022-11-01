@@ -119,6 +119,7 @@
       var a;
       var nvalue;
       var kvalue;
+      var isTruncuated;
 
       //selectors
       let n = document.querySelector("#n");
@@ -245,22 +246,11 @@
           }) // Gets the response and returns it as a blob
           .then((blob) => {
             //truncuate the blob to be viewable
-            if (blob.size > maxViewableFileSize) {
-              return {
-                blob: blob.slice(0, maxViewableFileSize).text(),
-                isTruncuated: true,
-              };
-            } else {
-              return {
-                blob: blob.text(),
-                isTruncuated: false,
-              };
-            }
+            if (blob.size > maxViewableFileSize) isTruncuated = true;
+            return blob.slice(0, maxViewableFileSize).text();
           })
-          .then((data) => {
-            let blob = data.blob;
-            let isTruncuated = data.isTruncuated;
-            let formated = blob.split("\n");
+          .then((text) => {
+            let formated = text.split("\n");
             formated.pop();
             results.value = formated.join("\n");
 
@@ -269,9 +259,10 @@
                 +"\n-- un complete list --\n--You can download the full list--";
 
             statustext.value = "Done";
+            isTruncuated = false;
           })
           .catch((err) => {
-            console.log(err)
+            console.log(err);
             statustext.value = "Error";
             results.value = "";
           });
