@@ -260,7 +260,7 @@
           .then((data) => {
             let blob = data.blob;
             let isTruncuated = data.isTruncuated;
-            let formated = text.split("\n");
+            let formated = blob.split("\n");
             formated.pop();
             results.value = formated.join("\n");
 
