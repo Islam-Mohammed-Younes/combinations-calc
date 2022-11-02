@@ -105,6 +105,16 @@
         font-size: 16px;
         font-weight: bold;
       }
+      .footer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        align-content: center;
+        margin: auto;
+        padding: 15px;
+        text-align: center;
+      }
     </style>
   </head>
   <script>
@@ -113,8 +123,8 @@
       var maxPossible = 2_500_000;
       var minPossible = 0;
       var maxViewableFileSize = 4 * 1024 * 1024; //5 Mebibyte
-      var baseURL=window.location.href
-     // var baseURL = "./";
+      var baseURL = window.location.href;
+      // var baseURL = "./";
 
       //global vars
       var service = 0;
@@ -218,7 +228,7 @@
             return b64toBlob(blob, "application/pdf");
           }) // Gets the response and returns it as a blob */
       function download() {
-        return
+        return;
         fetch(baseURL + "cache/" + nvalue + "C" + kvalue + ".pdf")
           .then((res) => {
             return res.blob();
@@ -343,6 +353,14 @@
       </form>
       <div class="display-area">
         <textarea class="results" id="results" name="results"></textarea>
+      </div>
+      <div class="footer">
+        <a href="https://info.flagcounter.com/lIoc"
+          ><img
+            src="https://s11.flagcounter.com/count2/lIoc/bg_FFFFFF/txt_000000/border_CCCCCC/columns_4/maxflags_4/viewers_0/labels_0/pageviews_0/flags_0/percent_0/"
+            alt="Flag Counter"
+            border="0"
+        /></a>
       </div>
     </div>
   </body>
